@@ -2,8 +2,7 @@ class File:
     """
     A file in the file system. Just contains text data
     """
-    def __init__(self, name):
-        self.name = ""
+    def __init__(self):
         self.data = ""
 
     def write(self, offset, data):

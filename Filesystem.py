@@ -8,7 +8,7 @@ class Filesystem:
 
     def __init__(self):
         # Initalize the root directory
-        self.root = Directory("", None)
+        self.root = Directory(None)
 
         # Initialize the directory cursor to the root directory
         self.curr = self.root
