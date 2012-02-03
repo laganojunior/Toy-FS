@@ -108,7 +108,7 @@ while True:
         elif command == "mvdir":
             if len(parts) != 3:
                 print "mvdir expects exactly 2 arguments"
-                print "usage: mvdir <file> <path>"
+                print "usage: mvdir <directory> <path>"
             else:
                 fs.move_directory(parts[1], parts[2])
         elif command == "rm":
