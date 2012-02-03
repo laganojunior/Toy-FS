@@ -20,7 +20,7 @@ fs = Filesystem()
 
 # Run the shell loop
 while True:
-    print "$",
+    print "[" + fs.get_working_path() + "] $",
 
     # Get next command
     input_str = raw_input()

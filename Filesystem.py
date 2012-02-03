@@ -9,7 +9,7 @@ class Filesystem:
 
     def __init__(self):
         # Initalize the root directory
-        self.root = Directory(None)
+        self.root = Directory("", None)
 
         # Initialize the directory cursor to the root directory
         self.curr = self.root
@@ -103,3 +103,8 @@ class Filesystem:
         """
         self.curr = self.resolve_path(path)
 
+    def get_working_path(self):
+        """
+        Returns the current working path
+        """
+        return self.curr.pwd()

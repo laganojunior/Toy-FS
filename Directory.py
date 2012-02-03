@@ -6,10 +6,10 @@ class Directory:
     A directory node in the file system tree
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         self.subdirectories = {}
         self.files = {}
-
+        self.name = name
         self.parent = parent
 
     def create_subdirectory(self, name):
@@ -20,7 +20,7 @@ class Directory:
         if name in self.subdirectories:
             return False
         else:
-            subdir = Directory(self)
+            subdir = Directory(name, self)
             self.subdirectories[name] = subdir
             return True
 
@@ -111,6 +111,7 @@ class Directory:
 
 
         subdir = self.subdirectories[name]
+        subdir.name = newname
         del self.subdirectories[name]
         self.subdirectories[newname] = subdir
 
@@ -120,4 +121,11 @@ class Directory:
         """
         return self.parent
 
- 
+    def pwd(self):
+        """
+        Returns the working directory string
+        """
+        if self.parent is None:
+            return "/"
+        else:
+            return self.parent.pwd() + self.name + "/"
