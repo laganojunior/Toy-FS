@@ -109,7 +109,7 @@ class Filesystem:
         """
         return self.curr.pwd()
 
-    def move_file(self, name, path):
+    def move_file(self, name, path, delete=True):
         """
         Moves a file
         """
@@ -124,10 +124,11 @@ class Filesystem:
 
         # Move the file by deleting it and recreating it
         f = self.curr.get_file(name)
-        self.curr.delete_file(name)
+        if delete:
+            self.curr.delete_file(name)
         target.add_file(name, f)
 
-    def move_directory(self, name, path):
+    def move_directory(self, name, path, delete=True):
         """
         Moves a directory
         """
@@ -142,7 +143,8 @@ class Filesystem:
 
         # Move the directory by deleting it and recreating it
         d = self.curr.get_subdirectory(name)
-        self.curr.delete_subdirectory(name)
+        if delete:
+            self.curr.delete_subdirectory(name)
         target.add_subdirectory(name, d)
 
     def delete_file(self, name):
@@ -157,3 +159,16 @@ class Filesystem:
         """
         self.curr.delete_subdirectory(name)
 
+    def copy_file(self, name, path):
+        """
+        Copies a file
+        """
+        # Perform the move without the delete
+        self.move_file(name, path, False)
+
+    def copy_directory(self, name, path):
+        """
+        Copies a directory
+        """
+        # Perform the move with the delete
+        self.move_directory(name, path, False)

@@ -18,6 +18,8 @@ def print_help():
     print "mvdir <directory> <path> - Moves a directory to a new directory"
     print "rm <file> - Deletes a file"
     print "rmdir <file> - Deletes a subdirectory"
+    print "cp <file> <path> - Copies a file"
+    print "cpdir <directory> <path>- Copies a subdirectory"
 
 # Create the filesystem
 fs = Filesystem()
@@ -123,6 +125,18 @@ while True:
                 print "usage: rmdir <directory>"
             else:
                 fs.delete_directory(parts[1])
+        elif command == "cp":
+            if len(parts) != 3:
+                print "cp expects exactly 2 argument"
+                print "usage: cp <file> <path>"
+            else:
+                fs.copy_file(parts[1], parts[2])
+        elif command == "cpdir":
+            if len(parts) != 3:
+                print "cpdir expects exactly 2 argument"
+                print "usage: cpdir <directory> <path>"
+            else:
+                fs.copy_directory(parts[1], parts[2])
         else:
             print "Unknown command:", command
             print_goto_help()
