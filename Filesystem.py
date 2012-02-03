@@ -18,6 +18,10 @@ class Filesystem:
         """
         Create a new subdirectory under the current directory
         """
+        # Check for slashes
+        if "/" in name:
+            raise FSException("Directory names cannot have /")
+
         newdir = FSNode_Directory(name, self.curr)
         self.curr.add_child(name, newdir)
 
