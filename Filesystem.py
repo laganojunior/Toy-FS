@@ -59,3 +59,14 @@ class Filesystem:
             raise FSException("File %s doesn't exist" % name)
 
         self.curr.rename_file(name, newname)
+
+    def rename_dir(self, name, newname):
+        """
+        Renames a directory. If the directory doesn't existing, then a
+        FSException is thrown
+        """
+        if not self.curr.subdirectory_exists(name):
+            raise FSException("Directory %s doesn't exist" % name)
+
+        self.curr.rename_subdirectory(name, newname)
+ 

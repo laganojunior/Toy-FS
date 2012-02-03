@@ -77,3 +77,20 @@ class Directory:
         del self.files[name]
         self.files[newname] = f
 
+    def subdirectory_exists(self, name):
+        """
+        Returns whether a subdirectory exists
+        """
+        return name in self.subdirectories
+
+    def rename_subdirectory(self, name, newname):
+        """
+        Renames a subdirectory, If the subdirectory doesn't exist, then a
+        FSException is thrown.
+        """
+        if name not in self.subdirectories:
+            raise FSException("Directory %s doesn't exist" % name)
+
+        subdir = self.subdirectories[name]
+        del self.subdirectories[name]
+        self.subdirectories[newname] = subdir

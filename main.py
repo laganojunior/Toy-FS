@@ -12,6 +12,8 @@ def print_help():
     print "write <file_name> <offset> <data> - Write data to a file starting from some offset."
     print "read <file_name> <offset> <length> - Read data from a file starting from some offset up to a desired length"
     print "rename <file_name> <new_filename> - Rename a file"
+    print "renamedir <directory_name> <new_directory_name> - Rename a directory"
+
 
 # Create the filesystem
 fs = Filesystem()
@@ -81,6 +83,12 @@ while True:
                 print "usage: rename <filename> <new_filename>"
             else:
                 fs.rename_file(parts[1], parts[2])
+        elif command == "renamedir":
+            if len(parts) != 3:
+                print "renamedir expects exactly 2 arguments"
+                print "usage: renamedir <directory_name> <new_directory_name>"
+            else:
+                fs.rename_dir(parts[1], parts[2])
         else:
             print "Unknown command:", command
             print_goto_help()
