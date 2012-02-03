@@ -1,4 +1,5 @@
 from File import File
+from FSException import FSException
 
 class Directory:
     """
@@ -68,10 +69,14 @@ class Directory:
 
     def rename_file(self, name, newname):
         """
-        Renames a file. If the file doesn't exist, then a FSException is thrown
+        Renames a file. If the file doesn't exist or the target file already
+        exists, then a FSException is thrown
         """
         if name not in self.files:
             raise FSException("File %s doesn't exist" % name)
+
+        if newname in self.files:
+            raise FSException("Target %s already exists" % newname)
 
         f = self.files[name]
         del self.files[name]
@@ -85,11 +90,15 @@ class Directory:
 
     def rename_subdirectory(self, name, newname):
         """
-        Renames a subdirectory, If the subdirectory doesn't exist, then a
-        FSException is thrown.
+        Renames a subdirectory, If the subdirectory doesn't exist or the target
+        name already exists, then a FSException is thrown.
         """
         if name not in self.subdirectories:
             raise FSException("Directory %s doesn't exist" % name)
+
+        if newname in self.subdirectories:
+            raise FSException("Target %s already exist" % newname)
+
 
         subdir = self.subdirectories[name]
         del self.subdirectories[name]

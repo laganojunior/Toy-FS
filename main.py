@@ -1,5 +1,5 @@
 from Filesystem import Filesystem
-from Filesystem import FSException
+from FSException import FSException
 
 def print_goto_help():
     print "'help' for command list"

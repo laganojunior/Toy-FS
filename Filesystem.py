@@ -1,8 +1,6 @@
 from Directory import Directory
 from File import File
-
-class FSException(Exception):
-    pass
+from FSException import FSException
 
 class Filesystem:
     """
@@ -52,21 +50,13 @@ class Filesystem:
 
     def rename_file(self, name, newname):
         """
-        Renames a file. If the file doesn't exist, then a FSException is
-        thrown.
+        Renames a file.
         """
-        if not self.curr.file_exists(name):
-            raise FSException("File %s doesn't exist" % name)
-
         self.curr.rename_file(name, newname)
 
     def rename_dir(self, name, newname):
         """
-        Renames a directory. If the directory doesn't existing, then a
-        FSException is thrown
+        Renames a directory.
         """
-        if not self.curr.subdirectory_exists(name):
-            raise FSException("Directory %s doesn't exist" % name)
-
         self.curr.rename_subdirectory(name, newname)
- 
+
