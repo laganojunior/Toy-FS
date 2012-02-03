@@ -8,6 +8,8 @@ def print_help():
     print "help - print command list"
     print "mkdir <directory_name> - make a new subdirectory"
     print "ls - list directory contents"
+    print "write <file_name> <offset> <data> - Write data to a file starting from some offset."
+    print "read <file_name> <offset> <length> - Read data from a file starting from some offset up to a desired length"
 
 # Create the filesystem
 fs = Filesystem()
@@ -44,7 +46,32 @@ while True:
 
         for name in files:
             print name
+    elif command == "write":
+        if len(parts) != 4:
+            print "write expects exactly 3 arguments"
 
+            print "usage: write <file_name> <offset> <data>"
+            continue
+
+        if not parts[2].isdigit():
+            print "offset must be numeric"
+            print "usage: write <file_name> <offset> <data>"
+            continue
+
+        fs.write_to_file(parts[1], int(parts[2]), parts[3])
+    elif command == "read":
+        if len(parts) != 4:
+            print "read expects exactly 3 arguments"
+
+            print "usage: read <file_name> <offset> <length>"
+            continue
+
+        if not parts[2].isdigit() or not parts[3].isdigit():
+            print "offset and length must be numeric"
+            print "usage: read <file_name> <offset> <length>"
+            continue
+
+        print fs.read_from_file(parts[1], int(parts[2]), int(parts[3]))
     else:
         print "Unknown command:", command
         print_goto_help()
