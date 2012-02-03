@@ -46,7 +46,8 @@ class FSNode:
             raise FSException("Target %s already exists" % newname)
 
         node = self.children[name]
-        del self.children[newname]
+        node.name = newname
+        del self.children[name]
         self.children[newname] = node
 
     def child_exists(self, name):
