@@ -1,9 +1,15 @@
-class File:
+from FSNode import FSNode
+
+class FSNode_File(FSNode):
     """
     A file in the file system. Just contains text data
     """
-    def __init__(self):
+    def __init__(self, name, parent):
+        FSNode.__init__(self, name, parent)
         self.data = ""
+
+    def get_type(self):
+        return "FSNODE_FILE"
 
     def write(self, offset, data):
         """

@@ -8,17 +8,13 @@ def print_help():
     print "quit - quit program"
     print "help - print command list"
     print "cd <path> - changes the current directory"
-    print "cp <file> <path> - Copies a file"
-    print "cpdir <directory> <path>- Copies a subdirectory"
+    print "cp <source> <dest_path> - Copies a file or directory"
     print "ls - list directory contents"
     print "mkdir <directory_name> - make a new subdirectory"
-    print "mv <file> <path> - Moves a file to a new directory"
-    print "mvdir <directory> <path> - Moves a directory to a new directory"
+    print "mv <source> <dest_path> - Moves a file/directory"
     print "read <file_name> <offset> <length> - Read data from a file starting from some offset up to a desired length"
-    print "rename <file_name> <new_filename> - Rename a file"
-    print "renamedir <directory_name> <new_directory_name> - Rename a directory"
-    print "rm <file> - Deletes a file"
-    print "rmdir <directory> - Deletes a subdirectory"
+    print "rename <name> <new_name> - Rename a file/directory"
+    print "rm <source> - Deletes a file or directory"
     print "write <file_name> <offset> <data> - Write data to a file starting from some offset."
 
 # Create the filesystem
@@ -86,15 +82,9 @@ while True:
         elif command == "rename":
             if len(parts) != 3:
                 print "rename expects exactly 2 arguments"
-                print "usage: rename <filename> <new_filename>"
+                print "usage: rename <name> <new_name>"
             else:
-                fs.rename_file(parts[1], parts[2])
-        elif command == "renamedir":
-            if len(parts) != 3:
-                print "renamedir expects exactly 2 arguments"
-                print "usage: renamedir <directory_name> <new_directory_name>"
-            else:
-                fs.rename_dir(parts[1], parts[2])
+                fs.rename(parts[1], parts[2])
         elif command == "cd":
             if len(parts) != 2:
                 print "cd expects exactly 1 argument"
@@ -104,39 +94,21 @@ while True:
         elif command == "mv":
             if len(parts) != 3:
                 print "mv expects exactly 2 arguments"
-                print "usage: mv <file> <path>"
+                print "usage: mv <source> <path>"
             else:
-                fs.move_file(parts[1], parts[2])
-        elif command == "mvdir":
-            if len(parts) != 3:
-                print "mvdir expects exactly 2 arguments"
-                print "usage: mvdir <directory> <path>"
-            else:
-                fs.move_directory(parts[1], parts[2])
+                fs.move(parts[1], parts[2])
         elif command == "rm":
             if len(parts) != 2:
                 print "rm expects exactly 1 argument"
-                print "usage: rm <file>"
+                print "usage: rm <source>"
             else:
-                fs.delete_file(parts[1])
-        elif command == "rmdir":
-            if len(parts) != 2:
-                print "rmdir expects exactly 1 argument"
-                print "usage: rmdir <directory>"
-            else:
-                fs.delete_directory(parts[1])
+                fs.delete(parts[1])
         elif command == "cp":
             if len(parts) != 3:
                 print "cp expects exactly 2 argument"
-                print "usage: cp <file> <path>"
+                print "usage: cp <source> <path>"
             else:
-                fs.copy_file(parts[1], parts[2])
-        elif command == "cpdir":
-            if len(parts) != 3:
-                print "cpdir expects exactly 2 argument"
-                print "usage: cpdir <directory> <path>"
-            else:
-                fs.copy_directory(parts[1], parts[2])
+                fs.copy(parts[1], parts[2])
         else:
             print "Unknown command:", command
             print_goto_help()
