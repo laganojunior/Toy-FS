@@ -129,3 +129,43 @@ class Directory:
             return "/"
         else:
             return self.parent.pwd() + self.name + "/"
+
+    def delete_file(self, name):
+        """
+        Deletes a file. If the file doesn't already exist, then False is
+        returned. Otherwise, returns True
+        """
+        if name not in self.files:
+            return False
+        else:
+            del self.files[name]
+
+    def add_file(self, name, f):
+        """
+        Adds a file. If the file already exists,
+        then an FSException is raised
+        """
+        if name in self.files:
+            raise FSException("add_file: File %s already exists" % name)
+
+        self.files[name] = f
+
+    def delete_subdirectory(self, name):
+        """
+        Deletes a file. If the file doesn't already exist, then False is
+        returned. Otherwise, returns True
+        """
+        if name not in self.subdirectories:
+            return False
+        else:
+            del self.subdirectories[name]
+
+    def add_subdirectory(self, name, d):
+        """
+        Adds a subdirectory. If the directory already exists,
+        then an FSException is raised
+        """
+        if name in self.subdirectories:
+            raise FSException("add_file: File %s already exists" % name)
+
+        self.subdirectories[name] = d

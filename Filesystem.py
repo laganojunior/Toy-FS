@@ -108,3 +108,39 @@ class Filesystem:
         Returns the current working path
         """
         return self.curr.pwd()
+
+    def move_file(self, name, path):
+        """
+        Moves a file
+        """
+        # Check the file exists
+        if not self.curr.file_exists(name):
+            raise FSException("File %s doesn't exist" % name)
+
+        target = self.resolve_path(path)
+
+        if target.file_exists(name):
+            raise FSException("File %s already exists in target location" % name)
+
+        # Move the file by deleting it and recreating it
+        f = self.curr.get_file(name)
+        self.curr.delete_file(name)
+        target.add_file(name, f)
+
+    def move_directory(self, name, path):
+        """
+        Moves a directory
+        """
+        # Check the directory exists
+        if not self.curr.subdirectory_exists(name):
+            raise FSException("Directory %s doesn't exist" % name)
+
+        target = self.resolve_path(path)
+
+        if target.subdirectory_exists(name):
+            raise FSException("Directory %s already exists in target location" % name)
+
+        # Move the directory by deleting it and recreating it
+        d = self.curr.get_subdirectory(name)
+        self.curr.delete_subdirectory(name)
+        target.add_subdirectory(name, d)

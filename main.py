@@ -14,6 +14,9 @@ def print_help():
     print "rename <file_name> <new_filename> - Rename a file"
     print "renamedir <directory_name> <new_directory_name> - Rename a directory"
     print "cd <path> - changes the current directory"
+    print "mv <file> <path> - Moves a file to a new directory"
+    print "mvdir <file> <path> - Moves a directory to a new directory"
+
 
 # Create the filesystem
 fs = Filesystem()
@@ -95,6 +98,19 @@ while True:
                 print "usage: cd <path>"
             else:
                 fs.change_curr(parts[1])
+        elif command == "mv":
+            if len(parts) != 3:
+                print "mv expects exactly 2 arguments"
+                print "usage: mv <file> <path>"
+            else:
+                fs.move_file(parts[1], parts[2])
+        elif command == "mvdir":
+            if len(parts) != 3:
+                print "mvdir expects exactly 2 arguments"
+                print "usage: mvdir <file> <path>"
+            else:
+                fs.move_directory(parts[1], parts[2])
+
         else:
             print "Unknown command:", command
             print_goto_help()
