@@ -1,6 +1,9 @@
 from Directory import Directory
 from File import File
 
+class FSException(Exception):
+    pass
+
 class Filesystem:
     """
     An implementation of a toy in-memory filesystem
@@ -46,3 +49,13 @@ class Filesystem:
             return None
         else:
             return self.curr.get_file(name).read(offset, length)
+
+    def rename_file(self, name, newname):
+        """
+        Renames a file. If the file doesn't exist, then a FSException is
+        thrown.
+        """
+        if not self.curr.file_exists(name):
+            raise FSException("File %s doesn't exist" % name)
+
+        self.curr.rename_file(name, newname)

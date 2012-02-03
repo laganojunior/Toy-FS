@@ -65,3 +65,15 @@ class Directory:
         Returns whether a file exists
         """
         return name in self.files
+
+    def rename_file(self, name, newname):
+        """
+        Renames a file. If the file doesn't exist, then a FSException is thrown
+        """
+        if name not in self.files:
+            raise FSException("File %s doesn't exist" % name)
+
+        f = self.files[name]
+        del self.files[name]
+        self.files[newname] = f
+
