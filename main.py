@@ -13,7 +13,7 @@ def print_help():
     print "read <file_name> <offset> <length> - Read data from a file starting from some offset up to a desired length"
     print "rename <file_name> <new_filename> - Rename a file"
     print "renamedir <directory_name> <new_directory_name> - Rename a directory"
-
+    print "cd <path> - changes the current directory"
 
 # Create the filesystem
 fs = Filesystem()
@@ -89,6 +89,12 @@ while True:
                 print "usage: renamedir <directory_name> <new_directory_name>"
             else:
                 fs.rename_dir(parts[1], parts[2])
+        elif command == "cd":
+            if len(parts) != 2:
+                print "cd expects exactly 1 argument"
+                print "usage: cd <path>"
+            else:
+                fs.change_curr(parts[1])
         else:
             print "Unknown command:", command
             print_goto_help()

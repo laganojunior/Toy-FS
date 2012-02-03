@@ -60,3 +60,46 @@ class Filesystem:
         """
         self.curr.rename_subdirectory(name, newname)
 
+    def resolve_path(self, path):
+        """
+        Returns the directory corresponding to the path string relative to the
+        current directory. Raises an FSException on an error.
+        """
+        if path == "":
+            return self.curr
+
+        # check if the path starts with /, then it is absolute and should start
+        # root
+        cursor = self.curr
+        if path[0] == "/":
+            cursor = self.root
+            path = path[1:]
+
+        dirs = path.split("/")
+
+        for dirname in dirs:
+            if dirname == "":
+                continue
+
+            if dirname == "..": # Parent
+                p = cursor.get_parent()
+                if p is not None:
+                    # If the node has no parent,
+                    # then it is the root. Otherwise,
+                    # go up one level
+                    cursor = p
+                continue
+
+            if not cursor.subdirectory_exists(dirname):
+                raise FSException("Directory %s doesn't exist" % dirname)
+
+            cursor = cursor.get_subdirectory(dirname)
+
+        return cursor
+
+    def change_curr(self, path):
+        """
+        Changes the current directory
+        """
+        self.curr = self.resolve_path(path)
+

@@ -47,6 +47,16 @@ class Directory:
         else:
             return None
 
+    def get_subdirectory(self, name):
+        """
+        Returns a directory object for the given file name. If the dir does not
+        exist, None is returned
+        """
+        if name in self.subdirectories:
+            return self.subdirectories[name]
+        else:
+            return None
+
     def create_file(self, name):
         """
         Creates a new empty file for the given filename. Returns True if
@@ -103,3 +113,11 @@ class Directory:
         subdir = self.subdirectories[name]
         del self.subdirectories[name]
         self.subdirectories[newname] = subdir
+
+    def get_parent(self):
+        """
+        Gets the parent of this directory
+        """
+        return self.parent
+
+ 
