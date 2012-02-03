@@ -7,19 +7,19 @@ def print_goto_help():
 def print_help():
     print "quit - quit program"
     print "help - print command list"
-    print "mkdir <directory_name> - make a new subdirectory"
+    print "cd <path> - changes the current directory"
+    print "cp <file> <path> - Copies a file"
+    print "cpdir <directory> <path>- Copies a subdirectory"
     print "ls - list directory contents"
-    print "write <file_name> <offset> <data> - Write data to a file starting from some offset."
+    print "mkdir <directory_name> - make a new subdirectory"
+    print "mv <file> <path> - Moves a file to a new directory"
+    print "mvdir <directory> <path> - Moves a directory to a new directory"
     print "read <file_name> <offset> <length> - Read data from a file starting from some offset up to a desired length"
     print "rename <file_name> <new_filename> - Rename a file"
     print "renamedir <directory_name> <new_directory_name> - Rename a directory"
-    print "cd <path> - changes the current directory"
-    print "mv <file> <path> - Moves a file to a new directory"
-    print "mvdir <directory> <path> - Moves a directory to a new directory"
     print "rm <file> - Deletes a file"
     print "rmdir <directory> - Deletes a subdirectory"
-    print "cp <file> <path> - Copies a file"
-    print "cpdir <directory> <path>- Copies a subdirectory"
+    print "write <file_name> <offset> <data> - Write data to a file starting from some offset."
 
 # Create the filesystem
 fs = Filesystem()
