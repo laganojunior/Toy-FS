@@ -43,10 +43,10 @@ class Filesystem:
     def read_from_file(self, name, offset, length):
         """
         Reads from data from a file starting from the desired offset. If the
-        file does not exist, this returns None
+        file does not exist, this throws a FSException
         """
         if not self.curr.file_exists(name):
-            return None
+            raise FSException("File %s doesn't exist" % name)
         else:
             return self.curr.get_file(name).read(offset, length)
 
