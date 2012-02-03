@@ -15,7 +15,7 @@ def print_help():
     print "renamedir <directory_name> <new_directory_name> - Rename a directory"
     print "cd <path> - changes the current directory"
     print "mv <file> <path> - Moves a file to a new directory"
-    print "mvdir <file> <path> - Moves a directory to a new directory"
+    print "mvdir <directory> <path> - Moves a directory to a new directory"
 
 
 # Create the filesystem
