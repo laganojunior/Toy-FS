@@ -17,7 +17,7 @@ def print_help():
     print "mv <file> <path> - Moves a file to a new directory"
     print "mvdir <directory> <path> - Moves a directory to a new directory"
     print "rm <file> - Deletes a file"
-    print "rmdir <file> - Deletes a subdirectory"
+    print "rmdir <directory> - Deletes a subdirectory"
     print "cp <file> <path> - Copies a file"
     print "cpdir <directory> <path>- Copies a subdirectory"
 
