@@ -144,3 +144,16 @@ class Filesystem:
         d = self.curr.get_subdirectory(name)
         self.curr.delete_subdirectory(name)
         target.add_subdirectory(name, d)
+
+    def delete_file(self, name):
+        """
+        Delete a file
+        """
+        self.curr.delete_file(name)
+
+    def delete_directory(self, name):
+        """
+        Delete a subdirectory
+        """
+        self.curr.delete_subdirectory(name)
+

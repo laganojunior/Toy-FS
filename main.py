@@ -16,7 +16,8 @@ def print_help():
     print "cd <path> - changes the current directory"
     print "mv <file> <path> - Moves a file to a new directory"
     print "mvdir <directory> <path> - Moves a directory to a new directory"
-
+    print "rm <file> - Deletes a file"
+    print "rmdir <file> - Deletes a subdirectory"
 
 # Create the filesystem
 fs = Filesystem()
@@ -110,7 +111,18 @@ while True:
                 print "usage: mvdir <file> <path>"
             else:
                 fs.move_directory(parts[1], parts[2])
-
+        elif command == "rm":
+            if len(parts) != 2:
+                print "rm expects exactly 1 argument"
+                print "usage: rm <file>"
+            else:
+                fs.delete_file(parts[1])
+        elif command == "rmdir":
+            if len(parts) != 2:
+                print "rmdir expects exactly 1 argument"
+                print "usage: rmdir <directory>"
+            else:
+                fs.delete_directory(parts[1])
         else:
             print "Unknown command:", command
             print_goto_help()
