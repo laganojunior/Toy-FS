@@ -51,6 +51,10 @@ class Filesystem:
         Writes data to a file in the current directory. If the file does not
         exist, then it will be created.
         """
+        # Check for slashes
+        if "/" in name:
+            raise FSException("File names cannot have /")
+
         # Check if the name exists
         if self.curr.child_exists(name):
             node = self.curr.get_child(name)
@@ -82,6 +86,9 @@ class Filesystem:
         """
         Rename a node
         """
+        if "/" in newname:
+            raise FSException("Names cannot have /")
+
         self.curr.rename_child(name, newname)
 
     def resolve_path(self, path):
